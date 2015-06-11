@@ -30,6 +30,6 @@ angular.module('cravaApp')
             $scope.crava[fileItem.alias].push(fileItem.file);
             console.log($scope.fileinfo);
             // We're changing sub objects, so apply.
-            $scope.$apply()
+            $scope.$apply();
         };
     }]);
