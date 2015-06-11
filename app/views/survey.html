@@ -1,0 +1,67 @@
+<h2>Survey information</h2>
+
+<h3>Add stack</h3>
+<p>Add a seismic data cube</p>
+
+<div
+   nv-file-drop=""
+   uploader="uploader"
+   options="{alias: '{{ input.identifier }}'}"
+   >
+  <div>
+    <div class="well drop-zone" nv-file-over="" uploader="uploader" id="upload_stack" >
+      Drop a file.
+    </div>
+    <span class="btn btn-default btn-file">
+      Browse <input type="file" nv-file-select="fileinfo" uploader="uploader" multiple  />
+    </span>
+    <span popover="*sgy, *segy" popover-title="Supported formats" popover-trigger="mouseenter"><span class="glyphicon glyphicon-info-sign"></span></span>
+  </div>
+
+</div>
+
+<div ng-repeat="info in fileinfo" class="well">
+  <h3>Info for file {{ info.file['name'] }}</h3>
+
+  <form class="form">
+    <div class="form-group">
+      <label>Survey type</label>
+      <label class="radio-inline">
+        <input ng-model="info.properties['surveytype']" type="radio" name="surveytype" id="surveypp_{{info.file['name']}}" value="pp" checked>
+        pp
+      </label>
+
+      <label class="radio-inline">
+        <input ng-model="info.properties['surveytype']" type="radio" name="surveytype" id="surveyps_{{info.file['name']}}" value="ps">
+        ps
+      </label>
+    </div>
+    <div class="form-group">
+      <label class="selection-inline">Header format information</label>
+      <select ng-model="info.properties['header']" class="form-control" id="header_{{info.file['name']}}">
+        <option>Auto detect</option>
+        <option>Seisworks (small)</option>
+        <option>Seisworks (big)</option>
+        <option>IESX</option>
+        <option>Charisma</option>
+        <option>User defined</option>
+      </select>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" ng-model="info.properties['globalwavelet']" id="globalwavelet_{{info.file['name']}}"> Estimate global wavelet
+        </label>
+      </div>
+    </div>
+    <div class="form-group" ng-hide="info.properties['globalwavelet']">
+      <p>Wavelet</p>
+      <p>Scale</p>
+    </div>
+  </form>
+  <button class="btn  btn-default" ng-click="clearFile(info)">
+    <span class="glyphicon glyphicon-trash"></span>
+  </button>
+  <h3>Internal info</h3>
+  <pre>{{ info.properties }} {{ info.file }}</pre>
+</div>
+
+
