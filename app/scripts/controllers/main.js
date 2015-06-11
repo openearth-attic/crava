@@ -10,6 +10,7 @@
 angular.module('cravaApp')
     .controller('MainCtrl', ['$scope', 'FileUploader', function ($scope, FileUploader) {
         $scope.fileinfo = {};
+        $scope.properties = {};
         var uploader = $scope.uploader = new FileUploader({
             // reference to server address that captures the uploads
             url: '/upload'

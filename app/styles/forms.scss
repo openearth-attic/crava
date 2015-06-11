@@ -33,3 +33,19 @@
     cursor: inherit;
     display: block;
 }
+
+label.image-select > input{ /* HIDE RADIO */
+  visibility: hidden; /* Makes input not-clickable */
+  position: absolute; /* Remove input from document flow */
+}
+label.image-select > input + img{ /* IMAGE STYLES */
+  cursor:pointer;
+  border:2px solid transparent;
+  max-width: 100px;
+  max-height: 50px;
+}
+label.image-select > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
+    border:2px solid;
+    border-color: rgba(200, 40,70, 0.4);
+}
+
