@@ -39,12 +39,56 @@
           <option>Yes</option>
           <option>No</option>
         </select>
-        <div class="checkbox">
-          <input type="checkbox" ng-model="info.properties['globalwavelet']" id="globalwavelet_{{info.file['name']}}">Optimize position for this well
-        </div>
       </div>
-     </div>
-    </form>
+
+      <div class="checkbox">
+        <input type="checkbox" ng-model="info.properties['globalwavelet']" id="globalwavelet_{{info.file['name']}}">Optimize position for this well
+      </div>
+
+    </div>
+  </form>
+</div>
+
+<div>
+  <form class="form"> 
+    <div class="form-group has-warning">
+      <label class="control-label" for="inputWarning1">Time:</label>
+      <input type="text" class="form-control" id="inputWarning1">
+      <label class="control-label" for="inputWarning2">Density:</label>
+      <input type="text" class="form-control" id="inputWarning2">
+      <label class="control-label" for="inputWarning3">Facies:</label>
+      <input type="text" class="form-control" id="inputWarning3">
+    </div>
+    <div class="input-group">
+      <span class="input-group-addon">
+        <label><input type="checkbox" aria-label="..."> Vp</label>
+      </span>
+      <input type="text" class="form-control" aria-label="...">
+    </div>
+    <div class="input-group">
+      <span class="input-group-addon">
+        <label><input type="checkbox" aria-label="..."> DT</label>
+      </span>
+      <input type="text" class="form-control" aria-label="...">
+    </div>
+    <div class="input-group">
+      <span class="input-group-addon">
+        <label><input type="checkbox" aria-label="..."> Vs</label>
+      </span>
+      <input type="text" class="form-control" aria-label="...">
+    </div>
+    <div class="input-group">
+      <span class="input-group-addon">
+        <label><input type="checkbox" aria-label="..."> DTS</label>
+      </span>
+      <input type="text" class="form-control" aria-label="...">
+    </div>
+    <div>
+      <label>Well header log names</label>
+      <textarea readonly rows="10" />
+      <button class="btn btn-default" type="submit">Get well header log names</button>
+    </div>
+  </form>
   <button class="btn  btn-default" ng-click="clearFile(info)">
     <span class="glyphicon glyphicon-trash"></span>
   </button>
