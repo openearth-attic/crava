@@ -1,1 +1,63 @@
-<p>This is the output view.</p>
+<h2>Output</h2>
+
+<h3>Output</h3>
+
+<div>
+  <form class="form"> 
+    <div class="form-group">
+      <label>Output directory:</label>
+      <input type="text" name="" value="" />
+      <button class="btn btn-default">Browse...</button>
+    </div>
+    <div class="form-group">
+      <label>Input xml-filename:</label>
+      <input type="text" name="" value="" />
+    </div>
+    <div class="form-group">
+      <label>Files prefix for output:</label>
+      <input type="text" name="" value="" />
+    </div>
+
+    <div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Seismic output</a>
+        </h4>
+      </div>
+      <div id="collapse1" class="panel-collapse collapse in">
+        <div class="panel-body">
+          aapje
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Elastic parameters</a>
+        </h4>
+      </div>
+      <div id="collapse2" class="panel-collapse collapse">
+        <div class="panel-body">
+          nootje
+      </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Background</a>
+        </h4>
+      </div>
+      <div id="collapse3" class="panel-collapse collapse">
+        <div class="panel-body">
+          miesje
+        </div>
+      </div>
+    </div>
+  </div> 
+
+  <h3>Internal info</h3>
+  <pre>{{ info.properties }} {{ info.file }}</pre>
+</div>
+
