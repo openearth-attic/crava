@@ -1,1 +1,54 @@
-<p>This is the wells view.</p>
+<h2>Wells</h2>
+
+<h3>Add well</h3>
+<p>Add a seismic data cube</p>
+
+<div
+   nv-file-drop=""
+   uploader="uploader"
+   options="{alias: '{{ input.identifier }}'}"
+   >
+  <div>
+    <div class="well drop-zone" nv-file-over="" uploader="uploader" id="upload_stack" >
+      Drop a file.
+    </div>
+    <span class="btn btn-default btn-file">
+      Browse <input type="file" nv-file-select="fileinfo" uploader="uploader" multiple  />
+    </span>
+    <span popover="*sgy, *segy" popover-title="Supported formats" popover-trigger="mouseenter"><span class="glyphicon glyphicon-info-sign"></span></span>
+  </div>
+
+</div>
+
+<div ng-repeat="info in fileinfo" class="well">
+  <h3>Info for file {{ info.file['name'] }}</h3>
+
+  <form class="form">
+    <div class="form-group">
+      <div class="checkboxes">
+        <label><input type="checkbox">Use for wavelet estimation</label>
+        <label><input type="checkbox">Use for facies probabilities estimation</label>
+        <label><input type="checkbox">Use for background trend estimation</label>
+        <label><input type="checkbox">Filter the elastic logs after inversion</label>
+      </div>
+
+      <div class="form-group">
+        <label class="selection-inline">Synthetic Vs log:</label>
+        <select ng-model="info.properties['header']" class="form-control" id="header_{{info.file['name']}}">
+          <option>Detect from Vp-Vs rank correlation</option>
+          <option>Yes</option>
+          <option>No</option>
+        </select>
+        <div class="checkbox">
+          <input type="checkbox" ng-model="info.properties['globalwavelet']" id="globalwavelet_{{info.file['name']}}">Optimize position for this well
+        </div>
+      </div>
+     </div>
+    </form>
+  <button class="btn  btn-default" ng-click="clearFile(info)">
+    <span class="glyphicon glyphicon-trash"></span>
+  </button>
+  <h3>Internal info</h3>
+  <pre>{{ info.properties }} {{ info.file }}</pre>
+</div>
+
