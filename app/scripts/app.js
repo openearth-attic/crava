@@ -34,8 +34,20 @@ angular
                 templateUrl: 'views/survey.html',
                 controller: 'MainCtrl'
             })
-            .when('/wavelet', {
-                templateUrl: 'views/wavelet.html',
+            .when('/wells', {
+                templateUrl: 'views/wells.html',
+                controller: 'MainCtrl'
+            })
+            .when('/prior', {
+                templateUrl: 'views/prior.html',
+                controller: 'MainCtrl'
+            })
+            .when('/horizons', {
+                templateUrl: 'views/horizons.html',
+                controller: 'MainCtrl'
+            })
+            .when('/output', {
+                templateUrl: 'views/output.html',
                 controller: 'MainCtrl'
             })
             .otherwise({
