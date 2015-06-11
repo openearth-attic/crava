@@ -1,73 +1,160 @@
-<h2>Survey information</h2>
+<form class="form-horizontal">
+  <div class="form-group">
+    <label class="col-sm-2" >Add seismic cube</label>
+    <div class="col-sm-10">
+      <div
+         nv-file-drop=""
+         uploader="uploader"
+         options="{alias: 'seismic'}"
+         >
+        <div>
+          <div class="well drop-zone" nv-file-over="" uploader="uploader" id="upload_stack">
+            Drop a file.
+          </div>
+          <span class="btn btn-default btn-file">
+            Browse ... <input type="file" nv-file-select="fileinfo" uploader="uploader" multiple
+                              options="{alias: 'seismic'}"
+                              />
+          </span>
+          <span popover="*sgy, *segy" popover-title="Supported formats" popover-trigger="mouseenter"><span class="glyphicon glyphicon-info-sign"></span></span>
+        </div>
 
-<h3>Add stack</h3>
-<p>Add a seismic data cube</p>
-
-<div
-   nv-file-drop=""
-   uploader="uploader"
-   options="{alias: '{{ input.identifier }}'}"
-   >
-  <div>
-    <div class="well drop-zone" nv-file-over="" uploader="uploader" id="upload_stack" >
-      Drop a file.
-    </div>
-    <span class="btn btn-default btn-file">
-      Browse <input type="file" nv-file-select="fileinfo" uploader="uploader" multiple  />
-    </span>
-    <span popover="*sgy, *segy" popover-title="Supported formats" popover-trigger="mouseenter"><span class="glyphicon glyphicon-info-sign"></span></span>
-  </div>
-
-</div>
-
-<div ng-repeat="info in fileinfo" class="well">
-  <h3>Info for file {{ info.file['name'] }}</h3>
-
-  <form class="form">
-    <div class="form-group">
-      <label>Offset angle</label>
-      <input type="number" name="" value="" />
-
-    </div>
-    <div class="form-group">
-
-      <label>Survey type</label>
-      <label class="radio-inline">
-        <input ng-model="info.properties['surveytype']" type="radio" name="surveytype" id="surveypp_{{info.file['name']}}" value="pp" checked>
-        pp
-      </label>
-
-      <label class="radio-inline">
-        <input ng-model="info.properties['surveytype']" type="radio" name="surveytype" id="surveyps_{{info.file['name']}}" value="ps">
-        ps
-      </label>
-    </div>
-    <div class="form-group">
-      <label class="selection-inline">Header format information</label>
-      <select ng-model="info.properties['header']" class="form-control" id="header_{{info.file['name']}}">
-        <option>Auto detect</option>
-        <option>Seisworks (small)</option>
-        <option>Seisworks (big)</option>
-        <option>IESX</option>
-        <option>Charisma</option>
-        <option>User defined</option>
-      </select>
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" ng-model="info.properties['globalwavelet']" id="globalwavelet_{{info.file['name']}}"> Estimate global wavelet
-        </label>
       </div>
     </div>
-    <div class="form-group" ng-hide="info.properties['globalwavelet']">
-      <p>Wavelet</p>
-      <p>Scale</p>
-    </div>
-  </form>
-  <button class="btn  btn-default" ng-click="clearFile(info)">
-    <span class="glyphicon glyphicon-trash"></span>
-  </button>
-  <h3>Internal info</h3>
-  <pre>{{ info.properties }} {{ info.file }}</pre>
+  </div>
+</form>
+
+<div ng-repeat="info in crava.seismic" class="panel panel-default">
+  <div class="panel-heading">Info for file {{ info['name'] }}</div>
+  <div class="panel-body">
+    <form class="form-horizontal">
+      <div class="form-group">
+        <label class="col-sm-2" >Start time</label>
+        <div class="col-sm-10">
+          <div class="dropdown" >
+            <a class="dropdown-toggle" id="{{ info['name'] }}dropdown" role="button" data-toggle="dropdown" >
+              <div class="input-group">
+                <input
+                   type="text"
+                   class="form-control"
+                   id="{{ info['name'] }}input"
+                   ng-name="info['name']"
+                   data-ng-model="info.properties['date']"
+                   />
+                <span class="input-group-addon">
+                  <i class="glyphicon glyphicon-calendar"></i>
+                </span>
+              </div>
+            </a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="{{ info['name'] }}label">
+              <datetimepicker
+                 data-ng-model="info.properties['date']"
+                 data-datetimepicker-config="{ dropdownSelector: '#{{ info.name }}dropdown' }"
+                 />
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2" >Offset angle</label>
+        <div class="col-sm-10">
+          <div class="input-group">
+            <div class="input-group-addon">&#x2220;</div>
+            <input class="form-control" type="number" name="" value="" placeholder="angle"/>
+            <div class="input-group-addon">&#176;</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Survey type</label>
+        <div class="col-sm-10">
+          <div class="radio">
+            <label>
+              <input ng-model="info.properties['surveytype']" type="radio" name="surveytype" id="surveypp_{{info.file['name']}}" value="pp">
+              pp
+            </label>
+          </div>
+          <div class="radio">
+            <label >
+              <input ng-model="info.properties['surveytype']" type="radio" name="surveytype" id="surveyps_{{info.file['name']}}" value="ps">
+              ps
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Header</label>
+        <div class="col-sm-10">
+          <select ng-model="info.properties['header']" class="form-control" id="header_{{info.file['name']}}">
+            <option>Auto detect</option>
+            <option>Seisworks (small)</option>
+            <option>Seisworks (big)</option>
+            <option>IESX</option>
+            <option>Charisma</option>
+            <option>User defined</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-2">
+        </div>
+        <div class="col-sm-10">
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" ng-model="info.properties['globalwavelet']" id="globalwavelet_{{info.file['name']}}"> Estimate global wavelet
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group" ng-hide="info.properties['globalwavelet']">
+        <label class="col-sm-2 control-label">Wavelet</label>
+        <div class="col-sm-10">
+          <span class="btn btn-default btn-file">
+            Browse ... <input type="file" nv-file-select="fileinfo" uploader="uploader" multiple
+                              options="{alias: 'wavelet'}"
+                              />
+          </span>
+        </div>
+      </div>
+      <div class="form-group" ng-hide="info.properties['globalwavelet']">
+        <label class="col-sm-2 control-label">Scale</label>
+        <div class="col-sm-10">
+          <div class="radio">
+            <label>
+              <input ng-model="info.properties['scale']" type="radio" name="scale" id="scale_{{info.file['name']}}" value="existing">
+              Use existing
+            </label>
+          </div>
+          <div class="radio">
+            <label >
+              <input ng-model="info.properties['scale']" type="radio" name="scale" id="scale_{{info.file['name']}}" value="estimate">
+              Estimate
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input ng-model="info.properties['scale']" type="radio" name="scale" id="scale_{{info.file['name']}}" value="fill">
+              Fill
+            </label>
+          </div>
+
+        </div>
+      </div>
+      <div class="form-group" ng-show="info.properties['scale']=='fill'">
+        <label class="col-sm-2 control-label">Scale factor</label>
+        <div class="col-sm-10">
+          <div class="input-group">
+            <input ng-model="info.properties['scaleFactor']" class="form-control " type="number" name="" value="" placeholder="factor"/>
+            <div class="input-group-addon">x</div>
+          </div>
+        </div>
+
+      </div>
+    </form>
+    <button class="btn  btn-default" ng-click="clearFile(info)">
+      <span class="glyphicon glyphicon-trash"></span>
+    </button>
+  </div>
 </div>
 
 

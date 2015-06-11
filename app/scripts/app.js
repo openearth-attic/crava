@@ -18,6 +18,7 @@ angular
         'ngSanitize',
         'ngTouch',
         'ui.bootstrap',
+        'ui.bootstrap.datetimepicker',
         'angularFileUpload'
     ])
     .config(function ($routeProvider) {

@@ -1,98 +1,155 @@
-<h2>Wells</h2>
+<form class="form-horizontal">
+  <div class="form-group">
+    <label class="col-sm-2" >Add well log</label>
+    <div class="col-sm-10">
+      <div
+         nv-file-drop=""
+         uploader="uploader"
+         options="{alias: 'wells'}"
+         >
+        <div>
+          <div class="well drop-zone" nv-file-over="" uploader="uploader" id="upload_stack">
+            Drop a file.
+          </div>
+          <span class="btn btn-default btn-file">
+            Browse ... <input type="file" nv-file-select="fileinfo" uploader="uploader" multiple
+                              options="{alias: 'wells'}"
+                              />
+          </span>
+          <span popover="*sgy, *segy" popover-title="Supported formats" popover-trigger="mouseenter"><span class="glyphicon glyphicon-info-sign"></span></span>
+        </div>
 
-<h3>Add well</h3>
-<p>Add a seismic data cube</p>
-
-<div
-   nv-file-drop=""
-   uploader="uploader"
-   options="{alias: '{{ input.identifier }}'}"
-   >
-  <div>
-    <div class="well drop-zone" nv-file-over="" uploader="uploader" id="upload_stack" >
-      Drop a file.
+      </div>
     </div>
-    <span class="btn btn-default btn-file">
-      Browse <input type="file" nv-file-select="fileinfo" uploader="uploader" multiple  />
-    </span>
-    <span popover="*sgy, *segy" popover-title="Supported formats" popover-trigger="mouseenter"><span class="glyphicon glyphicon-info-sign"></span></span>
   </div>
+</form>
 
+<div ng-repeat="info in crava.wells" class="panel panel-default">
+  <div class="panel-heading">
+    Info for file {{ info['name'] }}
+  </div>
+  <div class="panel-body">
+    <form class="form-horizontal">
+      <div class="form-group">
+        <label class="col-sm-2 control-label" >Log</label>
+        <div class="col-sm-10">
+          <div class="checkbox">
+            <label><input type="checkbox">Use for wavelet estimation</label>
+          </div>
+          <div class="checkbox">
+            <label><input type="checkbox">Use for facies probabilities estimation</label>
+          </div>
+          <div class="checkbox">
+            <label><input type="checkbox">Use for background trend estimation</label>
+          </div>
+          <div class="checkbox">
+            <label><input type="checkbox">Filter the elastic logs after inversion</label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        
+        <label class="col-sm-2 control-label">Synthetic Vs</label>
+        <div class="col-sm-10">
+          <select ng-model="info.properties['header']" class="form-control" id="header_{{info['name']}}">
+            <option>Detect from Vp-Vs rank correlation</option>
+            <option>Yes</option>
+            <option>No</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Optimize</label>
+        <div class="col-sm-10">
+          <div class="checkbox">
+            <label><input type="checkbox" ng-model="info.properties['globalwavelet']" id="globalwavelet_{{info.file['name']}}">Optimize position for this well</label>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>
 
-<div ng-repeat="info in fileinfo" class="well">
-  <h3>Info for file {{ info.file['name'] }}</h3>
+<div  class="panel panel-default">
+  <div class="panel-heading">
+    Log names
+  </div>
+  <div class="panel-body">
+    <form class="form-horizontal">
 
-  <form class="form">
-    <div class="form-group">
-      <div class="checkboxes">
-        <label><input type="checkbox">Use for wavelet estimation</label>
-        <label><input type="checkbox">Use for facies probabilities estimation</label>
-        <label><input type="checkbox">Use for background trend estimation</label>
-        <label><input type="checkbox">Filter the elastic logs after inversion</label>
+      <div class="form-group has-feedback" ng-class="{'has-warning': !crava['time'], 'has-success': crava['time']}">
+        <label class="col-sm-2 control-label" for="inputWarning1">Time:</label>
+        <div class="col-sm-10">
+          <input ng-model="crava['time']" type="text" class="form-control" id="inputWarning1">
+          <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-show="crava['time']"></span>
+          <span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true" ng-hide="crava['time']"></span>
+        </div>
+      </div>
+      <div class="form-group has-feedback" ng-class="{'has-warning': !crava[density], 'has-success': crava[density]}">
+        <label class="col-sm-2 control-label" for="inputWarning1">Density:</label>
+        <div class="col-sm-10">
+          <input ng-model="crava[density]" type="text" class="form-control" id="inputWarning1">
+          <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-show="crava[density]"></span>
+          <span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true" ng-hide="crava[density]"></span>
+        </div>
+      </div>
+      <div class="form-group has-feedback" ng-class="{'has-warning': !crava['facies'], 'has-success': crava['facies']}">
+        <label class="col-sm-2 control-label" for="inputWarning1">Facies:</label>
+        <div class="col-sm-10">
+          <input ng-model="crava['facies']" type="text" class="form-control" id="inputWarning1">
+          <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-show="crava['facies']"></span>
+          <span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true" ng-hide="crava['facies']"></span>
+        </div>
       </div>
 
       <div class="form-group">
-        <label class="selection-inline">Synthetic Vs log:</label>
-        <select ng-model="info.properties['header']" class="form-control" id="header_{{info.file['name']}}">
-          <option>Detect from Vp-Vs rank correlation</option>
-          <option>Yes</option>
-          <option>No</option>
-        </select>
+        <label class="col-sm-2 control-label">Log type</label>
+        <div class="col-sm-10">
+          <div class="radio">
+            <label>
+              <input ng-model="crava['logtype']" type="radio" name="logtype" id="logtype_{{info.file['name']}}" value="vp">
+              Vp
+            </label>
+          </div>
+          
+          <div class="radio">
+            <label >
+              <input ng-model="crava['logtype']" type="radio" name="logtype" id="logtype_{{info.file['name']}}" value="dt">
+              DT
+            </label>
+          </div>
+        </div>
       </div>
-
-      <div class="checkbox">
-        <input type="checkbox" ng-model="info.properties['globalwavelet']" id="globalwavelet_{{info.file['name']}}">Optimize position for this well
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Header</label>
+        <div class="col-sm-10">
+          <input class="form-control" type="text" name="" value=""  placeholder="name"/>
+        </div>
       </div>
-
-    </div>
-  </form>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Log type</label>
+        <div class="col-sm-10">
+          <div class="radio">
+            <label>
+              <input ng-model="crava['logtype2']" type="radio" name="logtype2" id="logtype2_{{info.file['name']}}" value="vs">
+              Vs
+            </label>
+          </div>
+          
+          <div class="radio">
+            <label >
+              <input ng-model="crava['logtype2']" type="radio" name="logtype2" id="logtype2_{{info.file['name']}}" value="dts">
+              DTS
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Names</label>
+        <div class="col-sm-10">
+          <textarea class="form-control" ng-model="crava['text']"  rows="10" />
+        </div>
+      </div>
+    </form>
+  </div>
 </div>
-
-<div>
-  <form class="form"> 
-    <div class="form-group has-warning">
-      <label class="control-label" for="inputWarning1">Time:</label>
-      <input type="text" class="form-control" id="inputWarning1">
-      <label class="control-label" for="inputWarning2">Density:</label>
-      <input type="text" class="form-control" id="inputWarning2">
-      <label class="control-label" for="inputWarning3">Facies:</label>
-      <input type="text" class="form-control" id="inputWarning3">
-    </div>
-    <div class="input-group">
-      <span class="input-group-addon">
-        <label><input type="checkbox" aria-label="..."> Vp</label>
-      </span>
-      <input type="text" class="form-control" aria-label="...">
-    </div>
-    <div class="input-group">
-      <span class="input-group-addon">
-        <label><input type="checkbox" aria-label="..."> DT</label>
-      </span>
-      <input type="text" class="form-control" aria-label="...">
-    </div>
-    <div class="input-group">
-      <span class="input-group-addon">
-        <label><input type="checkbox" aria-label="..."> Vs</label>
-      </span>
-      <input type="text" class="form-control" aria-label="...">
-    </div>
-    <div class="input-group">
-      <span class="input-group-addon">
-        <label><input type="checkbox" aria-label="..."> DTS</label>
-      </span>
-      <input type="text" class="form-control" aria-label="...">
-    </div>
-    <div>
-      <label>Well header log names</label>
-      <textarea readonly rows="10" />
-      <button class="btn btn-default" type="submit">Get well header log names</button>
-    </div>
-  </form>
-  <button class="btn  btn-default" ng-click="clearFile(info)">
-    <span class="glyphicon glyphicon-trash"></span>
-  </button>
-  <h3>Internal info</h3>
-  <pre>{{ info.properties }} {{ info.file }}</pre>
-</div>
-

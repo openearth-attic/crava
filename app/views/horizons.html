@@ -3,16 +3,16 @@
 <div class="form-group">
   <label>Vertical geometry selection</label>
   <div>
-    <label class="image-select"><input ng-model="properties['verticalGeometry']" type="radio" name="geometry" value="two_surface" /><img src="images/two_surface.png" alt="" class="img-rounded"/></label>
-    <label class="image-select"><input ng-model="properties['verticalGeometry']" type="radio" name="geometry" value="correlation_direction" /><img src="images/correlation_direction.png" alt="" class="img-rounded"/></label>
-    <label class="image-select"><input ng-model="properties['verticalGeometry']" type="radio" name="geometry" value="one_surface" /><img src="images/one_surface_paralell.png" alt="" class="img-rounded"/></label>
-    <label class="image-select"><input ng-model="properties['verticalGeometry']" type="radio" name="geometry" value="surface_constant" /><img src="images/surface_constant.png" alt="" class="img-rounded"/></label>
-    <label class="image-select"><input ng-model="properties['verticalGeometry']" type="radio" name="geometry" value="surface_base" /><img src="images/surface_base.png" alt="" class="img-rounded"/></label>
-    <label class="image-select"><input ng-model="properties['verticalGeometry']" type="radio" name="geometry" value="surface_top" /><img src="images/surface_top.png" alt="" class="img-rounded"/></label>
+    <label class="image-select"><input ng-model="crava['verticalGeometry']" type="radio" name="geometry" value="two_surface" /><img src="images/two_surface.png" alt="" class="img-rounded"/></label>
+    <label class="image-select"><input ng-model="crava['verticalGeometry']" type="radio" name="geometry" value="correlation_direction" /><img src="images/correlation_direction.png" alt="" class="img-rounded"/></label>
+    <label class="image-select"><input ng-model="crava['verticalGeometry']" type="radio" name="geometry" value="one_surface" /><img src="images/one_surface_paralell.png" alt="" class="img-rounded"/></label>
+    <label class="image-select"><input ng-model="crava['verticalGeometry']" type="radio" name="geometry" value="surface_constant" /><img src="images/surface_constant.png" alt="" class="img-rounded"/></label>
+    <label class="image-select"><input ng-model="crava['verticalGeometry']" type="radio" name="geometry" value="surface_base" /><img src="images/surface_base.png" alt="" class="img-rounded"/></label>
+    <label class="image-select"><input ng-model="crava['verticalGeometry']" type="radio" name="geometry" value="surface_top" /><img src="images/surface_top.png" alt="" class="img-rounded"/></label>
   </div>
 </div>
 
-<div ng-show="['correlation_direction', 'one_surface', 'surface_constant'].indexOf(properties['verticalGeometry']) >= 0">
+<div ng-show="['correlation_direction', 'one_surface', 'surface_constant'].indexOf(crava['verticalGeometry']) >= 0">
   <div class="form-group">
     <span class="btn btn-default btn-file">
       <label>Open time top service <input type="file" nv-file-select="fileinfo" uploader="uploader"  /></label>
@@ -24,10 +24,10 @@
     </span>
     <div class="checkbox">
       <label>
-        <input type="checkbox" ng-model="properties['depthConversion']"> Time to depth conversion
+        <input type="checkbox" ng-model="crava['depthConversion']"> Time to depth conversion
       </label>
     </div>
-    <div ng-show="properties['depthConversion']">
+    <div ng-show="crava['depthConversion']">
       <span class="btn btn-default btn-file">
         <label>Depth top file <input type="file" nv-file-select="fileinfo" uploader="uploader"  /></label>
       </span>
@@ -37,29 +37,27 @@
 
       <div class="radio">
         <label>
-          <input ng-model="properties['velocityField']" type="radio" name="velocityField" id="constant" value="constant">
+          <input ng-model="crava['velocityField']" type="radio" name="velocityField" id="constant" value="constant">
           Constant
         </label>
       </div>
       <div class="radio">
         <label>
-          <input ng-model="properties['velocityField']" type="radio" name="velocityField" id="inversion" value="inversion">
+          <input ng-model="crava['velocityField']" type="radio" name="velocityField" id="inversion" value="inversion">
           Inversion
         </label>
       </div>
       <div class="radio ">
         <label>
-          <input ng-model="properties['velocityField']" type="radio" name="velocityField" id="file" value="file" >
+          <input ng-model="crava['velocityField']" type="radio" name="velocityField" id="file" value="file" >
           File
         </label>
 
       </div>
-      <span class="btn btn-default btn-file" ng-show="properties['velocityField']=='file'">
+      <span class="btn btn-default btn-file" ng-show="crava['velocityField']=='file'">
         <label>Velocity field file <input type="file" nv-file-select="fileinfo" uploader="uploader"  /></label>
       </span>
     </div>
 
   </div>
 </div>
-
-<pre>{{ properties  }}</pre>

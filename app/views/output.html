@@ -1,63 +1,47 @@
-<h2>Output</h2>
-
-<h3>Output</h3>
-
 <div>
-  <form class="form"> 
+  <form class="form-horizontal">
     <div class="form-group">
-      <label>Output directory:</label>
-      <input type="text" name="" value="" />
-      <button class="btn btn-default">Browse...</button>
-    </div>
-    <div class="form-group">
-      <label>Input xml-filename:</label>
-      <input type="text" name="" value="" />
+      <label class="col-sm-2">Output directory</label>
+      <div class="col-sm-10">
+        <input class="form-control" ng-model="crava['directory']" type="file" name="" value="" />
+      </div>
     </div>
     <div class="form-group">
-      <label>Files prefix for output:</label>
-      <input type="text" name="" value="" />
-    </div>
-
-    <div class="panel-group" id="accordion">
-    <div class="panel panel-default">
-    <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Seismic output</a>
-        </h4>
-      </div>
-      <div id="collapse1" class="panel-collapse collapse in">
-        <div class="panel-body">
-          aapje
-        </div>
+      <label class="col-sm-2">Input file:</label>
+      <div class="col-sm-10">
+        <input ng-model="crava['basename']" class="form-control" type="text" name="" value="" placeholder="basename"/>
       </div>
     </div>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Elastic parameters</a>
-        </h4>
-      </div>
-      <div id="collapse2" class="panel-collapse collapse">
-        <div class="panel-body">
-          nootje
-      </div>
+    <div class="form-group">
+      <label class="col-sm-2">Output prefix:</label>
+      <div class="col-sm-10">
+        <input ng-model="crava['prefix']" class="form-control" type="text" name="" value="" placeholder="prefix" />
       </div>
     </div>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Background</a>
-        </h4>
-      </div>
-      <div id="collapse3" class="panel-collapse collapse">
-        <div class="panel-body">
-          miesje
-        </div>
-      </div>
-    </div>
-  </div> 
-
-  <h3>Internal info</h3>
-  <pre>{{ info.properties }} {{ info.file }}</pre>
+  </form>
 </div>
 
+<accordion close-others="true">
+  <accordion-group heading="Seismic output" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
+    This content is straight in the template.
+  </accordion-group>
+  <accordion-group heading="Elastic parameters">
+    <p>The body of the accordion group grows to fit the contents</p>
+  </accordion-group>
+  <accordion-group >
+    <accordion-heading>
+      Background
+    </accordion-heading>
+    This is just some content to illustrate fancy headings.
+  </accordion-group>
+  <accordion-group heading="Well output">
+    <p>The body of the accordion group grows to fit the contents</p>
+  </accordion-group>
+  <accordion-group heading="Wavelet output">
+    <p>The body of the accordion group grows to fit the contents</p>
+  </accordion-group>
+  <accordion-group heading="Other output">
+    <p>The body of the accordion group grows to fit the contents</p>
+  </accordion-group>
+
+</accordion>

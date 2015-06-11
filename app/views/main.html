@@ -1,8 +1,38 @@
-<h2>Main view</h2>
+<tabset>
+  <tab>
+    <tab-heading>
+      Survey
+    </tab-heading>
+    <div ng-include="'views/survey.html'"></div>
+  </tab>
+  <tab>
+    <tab-heading>
+      Wells
+    </tab-heading>
+    <div ng-include="'views/wells.html'"></div>
+  </tab>
+  <tab>
+    <tab-heading>
+      Horizons
+    </tab-heading>
+    <div ng-include="'views/horizons.html'"></div>
+  </tab>
+  <tab>
+    <tab-heading>
+      Prior
+    </tab-heading>
+    <div ng-include="'views/prior.html'"></div>
+  </tab>
+  <tab>
+    <tab-heading>
+      Output
+    </tab-heading>
+    <div ng-include="'views/output.html'"></div>
+  </tab>
+</tabset>
 
-Info currently available
+Crava info:
 <pre>
-{{ fileinfo}}
-
-{{ $scope }}
+{{ crava }}
 </pre>
+
